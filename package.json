@@ -1,0 +1,16 @@
+{
+  "name": "ec-ejs-layouts",
+  "description": "ec-ejs-layouts",
+  "repository": "https://github.com/express-components/ejs-layouts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "ejs": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "LGPL-3.0"
+}
