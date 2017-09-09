@@ -5,7 +5,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
-    "ejs": "^1.0.0"
+    "ejs": "^1.0.0",
+    "html-minifier": "^3.5.3"
   },
   "devDependencies": {},
   "scripts": {
