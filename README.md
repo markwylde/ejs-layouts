@@ -5,7 +5,7 @@ This component allows you to use layouts with your ejs files.
 You can pass options to the render function.
 
 Name          | Description                        | Default
-------------------------------------------------------------
+--------------|------------------------------------|--------
 disableMinify | Do not minify the HTML once merged | false
 
 ## Example
