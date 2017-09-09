@@ -12,7 +12,7 @@ module.exports = function (rootDir) {
 
       const varsRx = new RegExp(`<vars ([\\s\\S]*?)(><\\/vars>|\\/>)`, 'g')
       data.replace(varsRx, function (all, items) {
-        items.replace(/(.*?)=(.*?)( |$|\n)/g, function (all, key, val) {
+        items.replace(/(.*?)="(.*?)("|$|\n)/g, function (all, key, val) {
           if (val.substr(-1) === '"') {
             vars[key.trim()] = val.trim().slice(1, -1)
           } else {
