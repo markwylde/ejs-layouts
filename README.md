@@ -24,7 +24,7 @@ This component allows you to use layouts with your ejs files.
 </html>
 ```
 
-**File:** home.ejs
+**File:** views/home.ejs
 ```ejs
 <vars template="default" exampleVariable="Some example variable" />
 
@@ -46,22 +46,22 @@ This component allows you to use layouts with your ejs files.
 
 **File:** index.js
 ```js
+const path = require('path')
+
 const express = require('express')
 const ejsLayouts = require('ec-ejs-layouts')
 
 const app = express()
 
-app.engine('ejs', ejsTemplates({
-  default: path.join(__dirname, 'layouts/default.ejs'),
-  admin: path.join(__dirname, 'layouts/admin.ejs'),
-  blank: path.join(__dirname, 'layouts/blank.ejs')
-}))
+app.engine('ejs', ejsLayouts(path.join(__dirname, 'layouts')))
 
-app.get('/', async function (req, res) {
-  res.render('home')
+app.set('view engine', 'ejs')
+
+app.get('/', function (req, res) {
+  res.render('pages/home')
 })
 
-app.listen(8000, function () {
-  console.log('Public app listening on port 8000!')
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!')
 })
 ```
