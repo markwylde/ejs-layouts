@@ -13,7 +13,7 @@ module.exports = function (rootDir) {
       let vars = {}
 
       const varsRx = new RegExp(`<vars ([\\s\\S]*?)(><\\/vars>|\\/>)`, 'g')
-      data.replace(varsRx, function (all, items) {
+      data = data.replace(varsRx, function (all, items) {
         items.replace(/(.*?)="(.*?)("|$|\n)/g, function (all, key, val) {
           if (val.substr(-1) === '"') {
             vars[key.trim()] = val.trim().slice(1, -1)
@@ -21,6 +21,7 @@ module.exports = function (rootDir) {
             vars[key.trim()] = val.trim()
           }
         })
+        return ''
       })
 
       let injects = {
