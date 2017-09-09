@@ -1,5 +1,7 @@
 const fs = require('fs')
 const path = require('path')
+
+const minify = require('html-minifier').minify
 const ejs = require('ejs')
 
 module.exports = function (rootDir) { 
@@ -40,8 +42,25 @@ module.exports = function (rootDir) {
 
       fs.readFile(path.join(rootDir, (options.template || 'default') + '.ejs'), function (err, data) {
         if (err) console.log(err)
-        const finalHtml = ejs.render(data.toString(), options)
-
+        let finalHtml = ejs.render(data.toString(), options)
+        if (!options.disableMinify) {
+          finalHtml = minify(finalHtml, {
+            html5: true,
+            collapseInlineTagWhitespace: true,
+            collapseWhitespace: true,
+            conservativeCollapse: true,
+            ignoreCustomComments: true,
+            minifyCSS: true,
+            minifyJS: true,
+            quoteCharacter: '"',
+            removeComments: true,
+            removeEmptyAttributes: true,
+            removeRedundantAttributes: true,
+            removeScriptTypeAttributes: true,
+            removeStyleLinkTypeAttributes: true,
+            useShortDoctype: true
+          })
+        }
         callback(null, finalHtml)
       })
     })
