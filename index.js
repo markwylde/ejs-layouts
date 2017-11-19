@@ -6,10 +6,8 @@ const ejs = require('ejs')
 
 module.exports = function (rootDir) { 
   return function (filePath, options, callback) {
-    fs.readFile(filePath, function (err, data) {
-      if (err) throw err
+    function parse (data) {
       data = ejs.render(data.toString(), options)
-
       let vars = {}
 
       const varsRx = new RegExp(`<vars ([\\s\\S]*?)(><\\/vars>|\\/>)`, 'g')
@@ -64,6 +62,15 @@ module.exports = function (rootDir) {
         }
         callback(null, finalHtml)
       })
-    })
+    }
+
+    if (filePath === 'data') {
+      parse(options.data)
+    } else {
+      fs.readFile(filePath, function (err, data) {
+        if (err) throw err
+        parse(data)
+      })
+    }
   }
 }
